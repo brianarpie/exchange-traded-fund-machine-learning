@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+etfs = Etf.create([{ name: "TAN" }, { name: "KWT" }])
+
+holdings = Holding.create([{ name: "FSLR", etf_id:0 }])
+
+historical_price_data = Price.create([{
+  value: 1.05,
+  price_date: "2015-03-01",
+  priceable: holdings.first
+}])

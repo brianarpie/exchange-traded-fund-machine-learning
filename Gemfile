@@ -28,7 +28,9 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'rb-fsevent'
+  gem 'shoulda-matchers'
 end
 
 # Use ActiveModel has_secure_password
