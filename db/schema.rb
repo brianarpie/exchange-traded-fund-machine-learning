@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317023421) do
+ActiveRecord::Schema.define(version: 20150321184627) do
 
   create_table "etf_holdings", force: true do |t|
     t.integer  "etf_id"
@@ -29,13 +29,17 @@ ActiveRecord::Schema.define(version: 20150317023421) do
     t.datetime "updated_at"
   end
 
-  create_table "holdings", force: true do |t|
-    t.string   "name"
+  create_table "historical_assets", force: true do |t|
+    t.integer  "value"
+    t.string   "asset_date"
+    t.integer  "etf_holding_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "percentages", force: true do |t|
+  add_index "historical_assets", ["etf_holding_id"], name: "index_historical_assets_on_etf_holding_id"
+
+  create_table "historical_percentages", force: true do |t|
     t.decimal  "value",           precision: 18, scale: 4
     t.string   "percentage_date"
     t.integer  "etf_holding_id"
@@ -43,9 +47,9 @@ ActiveRecord::Schema.define(version: 20150317023421) do
     t.datetime "updated_at"
   end
 
-  add_index "percentages", ["etf_holding_id"], name: "index_percentages_on_etf_holding_id"
+  add_index "historical_percentages", ["etf_holding_id"], name: "index_historical_percentages_on_etf_holding_id"
 
-  create_table "prices", force: true do |t|
+  create_table "historical_prices", force: true do |t|
     t.float    "value"
     t.integer  "priceable_id"
     t.string   "priceable_type"
@@ -59,6 +63,12 @@ ActiveRecord::Schema.define(version: 20150317023421) do
     t.integer  "volume"
   end
 
-  add_index "prices", ["priceable_id"], name: "index_prices_on_priceable_id"
+  add_index "historical_prices", ["priceable_id"], name: "index_historical_prices_on_priceable_id"
+
+  create_table "holdings", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

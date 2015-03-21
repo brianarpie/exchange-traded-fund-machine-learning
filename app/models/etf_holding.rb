@@ -1,5 +1,6 @@
 class EtfHolding < ActiveRecord::Base
   belongs_to :etf
   belongs_to :holding
-  has_many :percentages
+  has_many :historical_percentages
+  has_many :historical_total_assets
 end

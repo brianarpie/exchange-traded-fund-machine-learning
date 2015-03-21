@@ -1,6 +1,6 @@
 class CreatePrices < ActiveRecord::Migration
   def change
-    create_table :prices do |t|
+    create_table :historical_prices do |t|
       t.float :value
       t.integer :priceable_id
       t.string :priceable_type
