@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321184627) do
+ActiveRecord::Schema.define(version: 20150323232214) do
 
   create_table "etf_holdings", force: true do |t|
     t.integer  "etf_id"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20150321184627) do
   add_index "historical_percentages", ["etf_holding_id"], name: "index_historical_percentages_on_etf_holding_id"
 
   create_table "historical_prices", force: true do |t|
-    t.float    "value"
     t.integer  "priceable_id"
     t.string   "priceable_type"
     t.datetime "created_at"
