@@ -31,6 +31,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'rb-fsevent'
   gem 'shoulda-matchers'
+  gem 'rake'
 end
 
 # Use ActiveModel has_secure_password
