@@ -19,8 +19,9 @@ holdings.each do |x|
 end
 
 scty = CSV.read('lib/assets/historical-price-data/SCTY-2015-03-23.csv')
- # => ["Date", "Open", "High", "Low", "Close", "Volume", "Adj Close"]
+ #["Date", "Open", "High", "Low", "Close", "Volume", "Adj Close"]
 scty.shift
+
 scty.each do |line|
   HistoricalPrice.create([{
     priceable_id: 3, 
@@ -32,4 +33,11 @@ scty.each do |line|
     close: line[4],
     volume: line[5]
   }])
+
+  HistoricalPercentage.create([{
+    percentage_date: line[0],
+    value: ((rand * 12 + 2) * 100).floor / 100.0,
+    etf_holding_id: 3
+  }])
 end
+
