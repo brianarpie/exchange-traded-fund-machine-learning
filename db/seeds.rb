@@ -22,7 +22,8 @@ scty = CSV.read('lib/assets/historical-price-data/SCTY-2015-03-23.csv')
  #["Date", "Open", "High", "Low", "Close", "Volume", "Adj Close"]
 scty.shift
 
-scty.each do |line|
+# reverse so index:1 is oldest data point
+scty.reverse.each do |line|
   HistoricalPrice.create([{
     priceable_id: 3, 
     priceable_type: "Holding", 
