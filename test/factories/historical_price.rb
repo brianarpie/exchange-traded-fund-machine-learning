@@ -3,7 +3,7 @@ FactoryGirl.define do
     
     priceable_id 1
     priceable_type 'Holding'
-    price_date '2015-01-01'
+    price_date Date.parse "2015-01-01"
 
     open 100
     close 101
