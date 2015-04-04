@@ -17,7 +17,12 @@ RSpec.describe HoldingController, type: :controller do
     end
 
     it "raises ActiveRecord::RecordNotFound - no id or name specified" do
-      expect { get :prices }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { get :prices }.to raise_error
+    end
+
+    it "returns http success - name specified instead of id" do
+      get :prices, ticker_symbol: holding.name, format: :json
+      expect(response).to have_http_status(:success)
     end
 
     it "returns all the historical prices" do
@@ -38,7 +43,6 @@ RSpec.describe HoldingController, type: :controller do
                format: :json
 
       assert_equal 1, JSON.parse(response.body).length
-
     end
   end
 

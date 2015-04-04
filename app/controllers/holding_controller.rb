@@ -2,11 +2,13 @@ class HoldingController < ApplicationController
 
   def prices
     @id = params[:id]
+    @ticker_symbol = params[:ticker_symbol]
 
     @start_date = params[:start_date]
     @end_date = params[:end_date]
 
-    prices = Holding.find(@id).historical_prices
+    holding = Holding.where('id = ? OR name = ?', @id, @ticker_symbol)
+    prices = holding[0].historical_prices
 
     if @start_date && @end_date
       @start_date = Date.parse @start_date
