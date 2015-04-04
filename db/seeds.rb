@@ -27,7 +27,7 @@ scty.reverse.each do |line|
   HistoricalPrice.create([{
     priceable_id: 3, 
     priceable_type: "Holding", 
-    price_date: Date.parse line[0], 
+    price_date: Date.parse(line[0]), 
     open: line[1],
     high: line[2],
     low: line[3],

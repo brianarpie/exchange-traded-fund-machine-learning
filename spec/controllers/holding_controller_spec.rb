@@ -21,7 +21,7 @@ RSpec.describe HoldingController, type: :controller do
     end
 
     it "returns http success - name specified instead of id" do
-      get :prices, ticker_symbol: holding.name, format: :json
+      get :prices, symbol: holding.name, format: :json
       expect(response).to have_http_status(:success)
     end
 
