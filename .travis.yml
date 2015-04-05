@@ -1,9 +1,9 @@
 language: ruby
 
 before_script:
-  - npm install -g karma
-  - npm install -g karma-jasmine
-  - npm install -g karma-phantomjs-launcher
+  - npm install karma
+  - npm install karma-jasmine
+  - npm install karma-phantomjs-launcher
 
 script:
-  - karma start karma.conf.js --single-run --browser PhantomJS
+  - node_modules/karma/bin/karma start karma.conf.js --single-run --browser PhantomJS
