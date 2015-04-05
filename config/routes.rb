@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   scope '/api' do
-    get 'holding/prices'
+    resources :holding, controller: 'holding', except: :new
+    resources :historical_price, controller: 'historical_price', except: [:new, :edit, :show ]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
