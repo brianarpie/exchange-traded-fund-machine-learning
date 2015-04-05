@@ -1,7 +1,8 @@
 language: ruby
 
 before_script:
-  - sudo npm install
+  - npm install karma
+  - npm install karma-requirejs
 
 script:
   - bundle exec rspec spec
