@@ -38,4 +38,12 @@ RSpec.describe HoldingController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    it "returns the holding with the id passed" do
+      get :show, id: holding.id, format: :json
+      assert_response :success
+      assert_equal holding.name, JSON.parse(response.body)['name']
+      assert_equal holding.id, JSON.parse(response.body)['id']
+    end
+  end
 end
