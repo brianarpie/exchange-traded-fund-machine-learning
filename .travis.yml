@@ -4,9 +4,7 @@ before_script:
   - npm install karma
   - npm install karma-requirejs
   - npm install karma-phantomjs-launcher
-  - npm install karma-chrome-launcher
-  - npm install karma-firefox-launcher
 
 script:
   - bundle exec rspec spec
-  - node_modules/karma/bin/karma start karma.conf.js --single-run
+  - node_modules/karma/bin/karma start karma.conf.js --single-run --browsers PhantomJS
