@@ -7,4 +7,4 @@ before_script:
   - npm install karma-phantomjs-launcher
 
 script:
-  - node_modules/karma/bin/karma start karma.conf.js --single-run --browser PhantomJS
+  - node_modules/karma/bin/karma start karma.conf.js --single-run --browsers PhantomJS
