@@ -13,7 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require angular
+//= require angular-route
 //= require_tree .
+//
 
 // Angular Front-End Application
 //
