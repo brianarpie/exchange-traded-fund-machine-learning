@@ -1,1 +1,7 @@
 language: ruby
+
+before_script:
+  - npm install karma
+
+script:
+  - karma start
