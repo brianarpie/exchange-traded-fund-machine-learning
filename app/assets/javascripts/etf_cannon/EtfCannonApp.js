@@ -2,7 +2,6 @@
 
   "use strict";
 
-  // TODO: declare these in a modules.js
   var app = angular.module("EtfCannonApp");
 
   app.config([
