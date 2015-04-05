@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :historical_price, controller: 'historical_price', except: [:new, :edit, :show ]
   end
 
+  scope '/spa' do
+    get '/etf_comparison', to: "single_page_app#etf_comparison"
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
