@@ -16,7 +16,7 @@ RSpec.describe HistoricalPriceController, type: :controller do
       assert_equal 2, JSON.parse(response.body).length
     end
 
-    it "returns all historical priecs inside a date range" do
+    it "returns all historical prices inside a date range" do
       holding
       historical_price
       historical_price_2

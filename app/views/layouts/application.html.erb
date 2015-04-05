@@ -10,5 +10,13 @@
 
 <%= yield %>
 
+<%# In order to bootstrap multiple Angular apps you should use the pc-app="myApp" declaration instead of ng-app="myApp" %>
+<script>
+  $("[pc-app]").each(function(index) {
+    var app = $(this).attr("pc-app")
+    angular.bootstrap($(this), [app])
+  });
+</script>
+
 </body>
 </html>
