@@ -1,3 +1,5 @@
+# TODO: move these factories out of ./test and into ./spec
+
 FactoryGirl.define do
   factory :historical_price do
     

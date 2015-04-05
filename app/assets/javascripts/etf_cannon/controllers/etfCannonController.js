@@ -8,6 +8,12 @@
   "$scope", 
   function($scope){
 
+    function init() {
+      $scope.msg = "Goondight!";
+    }
+
+    init();
+
   }])  
 
 })();

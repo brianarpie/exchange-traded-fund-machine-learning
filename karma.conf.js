@@ -15,6 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'vendor/assets/javascripts/angular/angular.min.js',
+      'vendor/assets/javascripts/angular-route/angular-route.min.js',
+      'vendor/assets/javascripts/angular-mocks/angular-mocks.js',
+      'app/assets/javascripts/modules.js',
+      'app/assets/javascripts/**/*.js',
       'test-main.js',
       {pattern: 'spec/**/*Spec.js', included: false}
     ],
@@ -61,6 +66,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   });
 };
