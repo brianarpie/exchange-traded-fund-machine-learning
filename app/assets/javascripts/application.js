@@ -15,4 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-angular.module("ExchangeTradedFarts", [])
+// Angular Front-End Application
+//
+// require_directory ./etf_cannon
+// require_directory ./etf_cannon/controllers

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   scope '/spa' do
-    get '/etf_comparison', to: "application#etf_comparison"
+    get '/etf_cannon', to: "application#etf_cannon"
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

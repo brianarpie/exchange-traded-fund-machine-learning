@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :null_session
 
 
-  def etf_comparison
+  def etf_cannon
   end
 
   # before_action :set_historical_price, only: [:update, :destroy]
