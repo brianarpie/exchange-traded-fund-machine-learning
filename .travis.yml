@@ -1,8 +1,8 @@
 language: ruby
 
 before_script:
-  - npm install
+  - sudo npm install
 
 script:
   - bundle exec rspec spec
-  - node_modules/karma/bin/karma start karma.conf.js --single-run --browsers PhantomJS
+  - node_modules/karma/bin/karma start karma.conf.js --single-run
