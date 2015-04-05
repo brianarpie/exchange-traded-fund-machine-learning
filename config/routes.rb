@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   scope '/api' do
-    resources :holding, controller: 'holding', except: :new
+    resources :holding, controller: 'holding', except: [:new, :edit]
     resources :historical_price, controller: 'historical_price', except: [:new, :edit, :show ]
   end
 
