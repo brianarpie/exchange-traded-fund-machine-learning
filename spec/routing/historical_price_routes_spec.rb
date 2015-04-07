@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe HoldingController do
+describe HistoricalPriceController do
   let(:holding) { FactoryGirl.create(:holding) }
 
   describe "routing" do
