@@ -61,8 +61,4 @@ class HoldingController < ApplicationController
     params.require(:holding).permit(:name)
   end
 
-  def filter_by_date
-    @prices.where(price_date: @start_date..@end_date)
-  end
-
 end
