@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   def etf_cannon
   end
 
+  def welcome
+  end
+
   # before_action :set_historical_price, only: [:update, :destroy]
 
   # # GET /api/historical_price.json

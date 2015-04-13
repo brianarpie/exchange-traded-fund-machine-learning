@@ -24,3 +24,6 @@
 //
 // require_directory ./etf_cannon
 // require_directory ./etf_cannon/controllers
+//
+// require_directory ./welcome
+// require_directory ./welcome/controllers

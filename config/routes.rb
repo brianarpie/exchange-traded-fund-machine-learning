@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  root 'application#welcome'
+
+  get '/welcome' => "application#welcome"
+
   scope '/api' do
     resources :holding, controller: 'holding', except: [:new, :edit]
     resources :historical_price, controller: 'historical_price', except: [:new, :edit, :show ]
