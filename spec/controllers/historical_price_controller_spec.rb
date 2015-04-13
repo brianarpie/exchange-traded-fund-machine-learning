@@ -63,7 +63,7 @@ RSpec.describe HistoricalPriceController, type: :controller do
 
     it "updates the historical_price -- :price_date" do
       init_price_date = historical_price.price_date
-      new_price_date = Date.parse("200-01-01")
+      new_price_date = Date.parse("2010-01-01")
 
       expect {
         put :update, id: historical_price.id, format: :json, 
