@@ -34,6 +34,9 @@ gem 'spring',        group: :development
 gem 'less-rails'
 gem 'therubyracer'
 
+# Devise User Auth. Gem
+gem 'devise'
+
 group :development, :test do
   gem 'pry'
   gem 'factory_girl_rails'

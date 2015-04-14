@@ -1,9 +1,7 @@
+# Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
-  factory :user do
-    first_name "Wobu"
-    last_name "Mingbai"
-    is_admin true
-    email "nishuoshenme@chinesegovt.com"
-  end
-end
+# FactoryGirl.define do
+#   factory :user do
+#     email "brian.arpie@gmail.com"
+#   end
+# end
