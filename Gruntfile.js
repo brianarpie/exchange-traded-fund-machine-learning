@@ -19,9 +19,6 @@
         unit: {
           configFile: 'karma.conf.js'
         }
-      },
-      browserify: {
-
       }
 
     });
@@ -34,7 +31,7 @@
 
     grunt.registerTask('test', ['concat', 'karma']);
 
-    grunt.registerTask('default', ['jshint', 'uglify', 'browserify']);
+    grunt.registerTask('default', ['jshint', 'uglify']);
   
   }
 
