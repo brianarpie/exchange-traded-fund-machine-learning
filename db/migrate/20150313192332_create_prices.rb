@@ -4,7 +4,7 @@ class CreatePrices < ActiveRecord::Migration
       t.float :value
       t.integer :priceable_id
       t.string :priceable_type
-      t.date :price_date
+      t.date :date
 
       t.timestamps
     end

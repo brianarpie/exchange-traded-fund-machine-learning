@@ -11,8 +11,8 @@ class HistoricalPriceController < ApplicationController
       begin
         holding = Holding.where('name = ?', symbol).first
         historical_prices = holding.historical_prices
-        if start_date && end_date  
-          historical_prices = historical_prices.where(price_date: start_date..end_date) 
+        if start_date && end_date
+          historical_prices = historical_prices.where(date: start_date..end_date) 
         end
         format.json { render json: historical_prices }
       rescue
@@ -60,7 +60,7 @@ class HistoricalPriceController < ApplicationController
   end
 
   def historical_price_params
-    params.require(:historical_price).permit(:price_date, :open, :close, :low, :high, :priceable_id, :priceable_type)
+    params.require(:historical_price).permit(:date, :open, :close, :low, :high, :priceable_id, :priceable_type)
   end
 
 end

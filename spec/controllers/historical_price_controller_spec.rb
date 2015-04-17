@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe HistoricalPriceController, type: :controller do
   let(:holding) { FactoryGirl.create(:holding) }
-  let(:historical_price) { FactoryGirl.create :historical_price, price_date: Date.parse("2015-01-01") }
-  let(:historical_price_2) { FactoryGirl.create :historical_price, price_date: Date.parse("2015-02-01") }
+  let(:historical_price) { FactoryGirl.create :historical_price, date: Date.parse("2015-01-01"), priceable_id: holding.id }
+  let(:historical_price_2) { FactoryGirl.create :historical_price, date: Date.parse("2015-02-01"), priceable_id: holding.id }
   
   before(:each) do
     holding
@@ -19,7 +19,7 @@ RSpec.describe HistoricalPriceController, type: :controller do
     end
 
     it "returns all historical prices inside a date range" do
-      date = historical_price.price_date.strftime('%Y-%m-%d')
+      date = historical_price.date.strftime('%Y-%m-%d')
 
       get :index, format: :json, symbol: holding.name, start_date: date, end_date: date
       assert_response :success
@@ -31,11 +31,13 @@ RSpec.describe HistoricalPriceController, type: :controller do
     it "creates a historical price" do
       expect {
         post :create, format: :json, historical_price: {
-          price_date: Date.parse("1992-11-15"), 
+          date: Date.parse("1992-11-15"), 
           open: 1, close: 2, low: 0.5, high: 2.5, 
           priceable_id: holding.id, priceable_type: "Holding"
         }
-      }.to change{ HistoricalPrice.count }.from(2).to(3)
+      }
+      .to change{ HistoricalPrice.count }.from(2).to(3)
+      
       assert_response :success
     end
   end
@@ -48,23 +50,29 @@ RSpec.describe HistoricalPriceController, type: :controller do
       expect {
         put :update, id: historical_price.id, format: :json, 
         historical_price: { open: new_open }
-      }.to change{ 
+      }
+      .to change{ 
         HistoricalPrice.find(historical_price.id).open 
-      }.from(init_open).to(new_open)
+      }
+      .from(init_open).to(new_open)
 
       assert_response :success
     end
 
-    it "updates the historical_price -- :price_date" do
-      init_price_date = historical_price.price_date
-      new_price_date = Date.parse("2010-01-01")
+    it "updates the historical_price -- :date" do
+      init_date = historical_price.date
+      new_date = Date.parse("2010-01-01")
 
       expect {
-        put :update, id: historical_price.id, format: :json, 
-        historical_price: { price_date: new_price_date }
-      }.to change{ 
-        HistoricalPrice.find(historical_price.id).price_date 
-      }.from(init_price_date).to(new_price_date)
+        put :update, 
+          format: :json, 
+          id: historical_price.id, 
+          historical_price: { date: new_date }
+      }
+      .to change{ 
+        HistoricalPrice.find(historical_price.id).date 
+      }
+      .from(init_date).to(new_date)
 
       assert_response :success
     end

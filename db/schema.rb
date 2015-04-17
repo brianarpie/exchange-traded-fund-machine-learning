@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150414004024) do
   create_table "historical_prices", force: true do |t|
     t.integer  "priceable_id"
     t.string   "priceable_type"
-    t.date     "price_date"
+    t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "open",           precision: 18, scale: 4
