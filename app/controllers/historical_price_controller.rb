@@ -8,14 +8,14 @@ class HistoricalPriceController < ApplicationController
     end_date = params[:end_date]
 
     respond_to do |format|
-      if symbol
+      begin
         holding = Holding.where('name = ?', symbol).first
         historical_prices = holding.historical_prices
         if start_date && end_date  
           historical_prices = historical_prices.where(price_date: start_date..end_date) 
         end
         format.json { render json: historical_prices }
-      else
+      rescue
         format.json { render plain: "Please specify a symbol.", status: :unprocessable_entity }
       end
     end
