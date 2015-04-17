@@ -60,8 +60,4 @@ class EtfController < ApplicationController
   def etf_params
     params.require(:etf).permit(:name)
   end
-
-  def filter_by_date
-    @prices.where(price_date: @start_date..@end_date)
-  end
 end
