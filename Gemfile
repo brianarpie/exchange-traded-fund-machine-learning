@@ -39,6 +39,8 @@ gem 'devise'
 
 group :development, :test do
   gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-theme'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.0'
