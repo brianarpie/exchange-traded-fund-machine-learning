@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   skip_before_filter  :verify_authenticity_token
+  # before_filter :authenticate_user!
   
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :null_session
-
 
   def etf_cannon
   end
