@@ -75,6 +75,8 @@ RSpec.describe HistoricalPriceController, type: :controller do
       expect {
         delete :destroy, id: historical_price.id, format: :json
       }.to change{ HistoricalPrice.count }.from(2).to(1)
+
+      assert_response :success
     end
   end
 
