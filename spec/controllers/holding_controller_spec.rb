@@ -17,7 +17,11 @@ RSpec.describe HoldingController, type: :controller do
 
   describe "POST #create" do
     it "creates a new holding" do
-      post :create, name: "ABC", format: :json
+      post :create, format: :json,
+        holding: { 
+          name: "ABC" 
+        }
+        
       assert_response :success
       assert_equal "ABC", JSON.parse(response.body)['name']
     end

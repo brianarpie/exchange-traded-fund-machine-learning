@@ -1,15 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe EtfController, type: :controller do
-  let(:etf) { FactoryGirl.create(:etf) }
-  
+  let(:etf) { FactoryGirl.create :etf, name: "ZZZ" }
+  let(:etf_2) { FactoryGirl.create :etf, name: "YYY" }
+
   before(:each) do
     etf
+    etf_2
   end
 
   describe "GET #index" do
     it "returns all etfs" do
       get :index, format: :json
+      assert_response :success
+      assert_equal 2, JSON.parse(response.body).length
+    end
+
+    it "get a single etf by name" do
+      get :index, format: :json, symbol: etf.name
+
       assert_response :success
       assert_equal 1, JSON.parse(response.body).length
     end
@@ -17,9 +26,14 @@ RSpec.describe EtfController, type: :controller do
 
   describe "POST #create" do
     it "creates a new etf" do
-      post :create, name: "ABC", format: :json
+      expect { 
+        post :create, format: :json,
+          etf: {
+            name: "CCC"
+          }
+      }.to change{ Etf.count }.from(2).to(3)
+      
       assert_response :success
-      assert_equal "ABC", JSON.parse(response.body)['name']
     end
   end
 
@@ -35,7 +49,7 @@ RSpec.describe EtfController, type: :controller do
     it "deletes the etf" do
       expect{
         delete :destroy, id: etf.id, format: :json
-      }.to change{ Etf.count }.from(1).to(0)
+      }.to change{ Etf.count }.from(2).to(1)
     end
   end
 

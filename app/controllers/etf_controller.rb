@@ -3,16 +3,20 @@ class EtfController < ApplicationController
 
   # GET /api/etf.json
   def index
+    symbol = params[:symbol]
+
     respond_to do |format|
-      format.json {
-        render json: Etf.all
-      }
+      if symbol
+        format.json { render json: Etf.where('name = ?', symbol) }
+      else
+        format.json { render json: Etf.all }
+      end
     end
   end
 
   # POST /api/etf.json
   def create
-    @etf = Etf.new({name: params[:name]})
+    @etf = Etf.new(etf_params)
 
     respond_to do |format|
       if @etf.save

@@ -12,7 +12,7 @@ class HoldingController < ApplicationController
 
   # POST /api/holding.json
   def create
-    @holding = Holding.new({name: params[:name]})
+    @holding = Holding.new(holding_params)
 
     respond_to do |format|
       if @holding.save
