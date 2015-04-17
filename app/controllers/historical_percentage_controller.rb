@@ -16,7 +16,7 @@ class HistoricalPercentageController < ApplicationController
         historical_percentages = etf_holding.historical_percentages
         
         if start_date && end_date
-          historical_percentages = historical_percentages.where(percentage_date: start_date..end_date)
+          historical_percentages = historical_percentages.where(date: start_date..end_date)
         end
         
         format.json { render json: historical_percentages }
@@ -66,7 +66,7 @@ class HistoricalPercentageController < ApplicationController
   end
 
   def historical_percentage_params
-    params.require(:historical_percentage).permit(:etf_holding_id, :percentage_date)
+    params.require(:historical_percentage).permit(:etf_holding_id, :date)
   end
 
 end

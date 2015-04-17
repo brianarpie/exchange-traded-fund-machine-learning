@@ -4,8 +4,8 @@ RSpec.describe HistoricalPercentageController, type: :controller do
   let(:etf) { FactoryGirl.create :etf }
   let(:holding) { FactoryGirl.create :holding }
   let(:etf_holding) { FactoryGirl.create :etf_holding, etf_id: etf.id, holding_id: holding.id }
-  let(:historical_percentage) { FactoryGirl.create :historical_percentage, percentage_date: Date.parse("2014-01-01"), etf_holding_id: etf_holding.id }
-  let(:historical_percentage_2) { FactoryGirl.create :historical_percentage, percentage_date: Date.parse("2014-01-02"), etf_holding_id: etf_holding.id }
+  let(:historical_percentage) { FactoryGirl.create :historical_percentage, date: Date.parse("2014-01-01"), etf_holding_id: etf_holding.id }
+  let(:historical_percentage_2) { FactoryGirl.create :historical_percentage, date: Date.parse("2014-01-02"), etf_holding_id: etf_holding.id }
 
   before(:each) do
     etf
@@ -27,7 +27,7 @@ RSpec.describe HistoricalPercentageController, type: :controller do
     end
 
     it "returns all historical percentages inside a date range" do
-      date = historical_percentage.percentage_date.strftime('%Y-%m-%d')
+      date = historical_percentage.date.strftime('%Y-%m-%d')
 
       get :index, 
         format:         :json, 
@@ -48,7 +48,7 @@ RSpec.describe HistoricalPercentageController, type: :controller do
           format: :json, 
           historical_percentage: {
             etf_holding_id: etf_holding.id,
-            percentage_date: Date.parse("2001-9-11")
+            date: Date.parse("2001-9-11")
           }
       }.to change{ HistoricalPercentage.count }.from(2).to(3)
 
@@ -58,17 +58,17 @@ RSpec.describe HistoricalPercentageController, type: :controller do
 
   describe "PUT #update" do
     it "updates the historical_percentage attributes" do
-      old_date = historical_percentage.percentage_date
+      old_date = historical_percentage.date
       new_date = Date.parse("2015-4-16")
 
       expect {
         put :update, format: :json, 
           id: historical_percentage.id,
           historical_percentage: {
-            percentage_date: new_date
+            date: new_date
           }
       }.to change { 
-        HistoricalPercentage.find(historical_percentage.id).percentage_date 
+        HistoricalPercentage.find(historical_percentage.id).date 
       }.from(old_date).to(new_date)
 
       assert_response :success

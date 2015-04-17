@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20150414004024) do
   add_index "historical_assets", ["etf_holding_id"], name: "index_historical_assets_on_etf_holding_id", using: :btree
 
   create_table "historical_percentages", force: true do |t|
-    t.decimal  "value",           precision: 18, scale: 4
-    t.date     "percentage_date"
+    t.decimal  "value",          precision: 18, scale: 4
+    t.date     "date"
     t.integer  "etf_holding_id"
     t.datetime "created_at"
     t.datetime "updated_at"

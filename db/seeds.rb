@@ -36,7 +36,7 @@ scty.reverse.each do |line|
   }])
 
   HistoricalPercentage.create([{
-    percentage_date: Date.parse(line[0]),
+    date: Date.parse(line[0]),
     value: ((rand * 12 + 2) * 100).floor / 100.0,
     etf_holding_id: 3
   }])
