@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150414004024) do
 
   create_table "historical_percentages", force: true do |t|
     t.decimal  "value",           precision: 18, scale: 4
-    t.string   "percentage_date"
+    t.date     "percentage_date"
     t.integer  "etf_holding_id"
     t.datetime "created_at"
     t.datetime "updated_at"
