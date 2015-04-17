@@ -2,10 +2,13 @@ require 'rails_helper'
 
 RSpec.describe EtfController, type: :controller do
   let(:etf) { FactoryGirl.create(:etf) }
+  
+  before(:each) do
+    etf
+  end
 
   describe "GET #index" do
     it "returns all etfs" do
-      etf
       get :index, format: :json
       assert_response :success
       assert_equal 1, JSON.parse(response.body).length
@@ -22,7 +25,6 @@ RSpec.describe EtfController, type: :controller do
 
   describe "PUT #update" do
     it "updates the etf" do
-      etf
       put :update, id: etf.id, format: :json, etf: { name: "NEW" }
       assert_response :success
       assert_equal "NEW", JSON(response.body)['name']
@@ -31,7 +33,6 @@ RSpec.describe EtfController, type: :controller do
 
   describe "DELETE #destroy" do
     it "deletes the etf" do
-      etf
       expect{
         delete :destroy, id: etf.id, format: :json
       }.to change{ Etf.count }.from(1).to(0)

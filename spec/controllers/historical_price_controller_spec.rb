@@ -4,23 +4,21 @@ RSpec.describe HistoricalPriceController, type: :controller do
   let(:holding) { FactoryGirl.create(:holding) }
   let(:historical_price) { FactoryGirl.create :historical_price, price_date: Date.parse("2015-01-01") }
   let(:historical_price_2) { FactoryGirl.create :historical_price, price_date: Date.parse("2015-02-01") }
+  
+  before(:each) do
+    holding
+    historical_price
+    historical_price_2
+  end
 
   describe "GET #index" do
     it "returns all historical prices" do
-      holding
-      historical_price
-      historical_price_2
-
       get :index, format: :json, symbol: holding.name
       assert_response :success
       assert_equal 2, JSON.parse(response.body).length
     end
 
     it "returns all historical prices inside a date range" do
-      holding
-      historical_price
-      historical_price_2
-
       date = historical_price.price_date.strftime('%Y-%m-%d')
 
       get :index, format: :json, symbol: holding.name, start_date: date, end_date: date
@@ -31,10 +29,6 @@ RSpec.describe HistoricalPriceController, type: :controller do
 
   describe "POST #create" do
     it "creates a historical price" do
-      holding
-      historical_price
-      historical_price_2
-
       expect {
         post :create, format: :json, historical_price: {
           price_date: Date.parse("1992-11-15"), 
@@ -78,10 +72,6 @@ RSpec.describe HistoricalPriceController, type: :controller do
 
   describe "DELETE #destroy" do
     it "deletes a historical price" do
-      holding
-      historical_price
-      historical_price_2
-
       expect {
         delete :destroy, id: historical_price.id, format: :json
       }.to change{ HistoricalPrice.count }.from(2).to(1)

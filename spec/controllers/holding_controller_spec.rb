@@ -3,9 +3,12 @@ require 'rails_helper'
 RSpec.describe HoldingController, type: :controller do
   let(:holding) { FactoryGirl.create(:holding) }
 
+  before(:each) do
+    holding
+  end
+
   describe "GET #index" do
     it "returns all holdings" do
-      holding
       get :index, format: :json
       assert_response :success
       assert_equal 1, JSON.parse(response.body).length
@@ -22,7 +25,6 @@ RSpec.describe HoldingController, type: :controller do
 
   describe "PUT #update" do
     it "updates the holding" do
-      holding
       put :update, id: holding.id, format: :json, holding: { name: "NEW" }
       assert_response :success
       assert_equal "NEW", JSON(response.body)['name']
