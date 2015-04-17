@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :holding, controller: 'holding', except: [:new, :edit]
     resources :etf, controller: 'etf', except: [:new, :edit]
-    resources :historical_price, controller: 'historical_price', except: [:new, :edit, :show ]
+    resources :historical_price, controller: 'historical_price', except: [:new, :edit, :show]
+    resources :historical_percentage, controller: 'historical_percentage', except: [:new, :edit, :show]
   end
 
   scope '/spa' do
