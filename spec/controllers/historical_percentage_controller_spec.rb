@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe HistoricalPercentageController, type: :controller do
   let(:etf) { FactoryGirl.create :etf }
   let(:holding) { FactoryGirl.create :holding }
-  let(:etf_holding) { FactoryGirl.create :etf_holding }
-  let(:historical_percentage) { FactoryGirl.create :historical_percentage, percentage_date: Date.parse("2014-01-01") }
-  let(:historical_percentage_2) { FactoryGirl.create :historical_percentage, percentage_date: Date.parse("2014-01-02") }
+  let(:etf_holding) { FactoryGirl.create :etf_holding, etf_id: etf.id, holding_id: holding.id }
+  let(:historical_percentage) { FactoryGirl.create :historical_percentage, percentage_date: Date.parse("2014-01-01"), etf_holding_id: etf_holding.id }
+  let(:historical_percentage_2) { FactoryGirl.create :historical_percentage, percentage_date: Date.parse("2014-01-02"), etf_holding_id: etf_holding.id }
 
   before(:each) do
     etf
