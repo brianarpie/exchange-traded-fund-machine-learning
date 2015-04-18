@@ -2,9 +2,9 @@
 
   "use strict";
 
-  var app = angular.module("EtfCannonApp");
+  var app = angular.module("ChartApp");
 
-  app.controller("EtfCannonController", [
+  app.controller("ChartController", [
   "$scope", 
   function($scope){
 

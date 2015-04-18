@@ -13,9 +13,7 @@ Rails.application.routes.draw do
     resources :historical_percentage, controller: 'historical_percentage', except: [:new, :edit, :show]
   end
 
-  scope '/spa' do
-    get '/etf_cannon', to: "application#etf_cannon"
-  end
+  get '/chart', to: "application#chart"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -2,7 +2,7 @@
 
   "use strict";
 
-  var app = angular.module("EtfCannonApp");
+  var app = angular.module("ChartApp");
 
   app.config([
     "$locationProvider",
@@ -10,8 +10,8 @@
     function($locationProvider, $routeProvider) {
       $locationProvider.html5Mode(true);
       $routeProvider.when('/', {
-        templateUrl: '/assets/etf_cannon/pages/index.html',
-        controller: 'EtfCannonController'
+        templateUrl: '/assets/chart/pages/index.html',
+        controller: 'ChartController'
       });
     }
   ]);
