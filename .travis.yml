@@ -2,10 +2,10 @@ language: ruby
 
 before_script:
   - npm install karma
-  - npm install karma-requirejs
+  - npm install bower
   - npm install karma-phantomjs-launcher
   - psql -c 'create database etf_test;' -U postgres
-  - bower install
+  - node_modules/bower/bin/bower install
 
 script:
   - bundle exec rspec spec
