@@ -1,0 +1,30 @@
+(function() {
+  
+  "use strict";
+
+  var app = angular.module("ApiResources");
+
+  app.factory("HistoricalPriceRsrc", [
+    "$resource",
+    "$cacheFactory",
+    function($resource, $cacheFactory){
+      var historicalPriceRsrc;
+      var route = "/api/historical_price.json";
+      var cache = $cacheFactory.get("HistoricalPriceRsrc");
+
+      if ( !cache ) {
+        cache = $cacheFactory("HistoricalPriceRsrc");
+      }
+
+      historicalPriceRsrc = $resource(route, {}, {
+        'get': {
+          method: 'get',
+          cache: cache
+        }
+      });
+
+      return historicalPriceRsrc;
+
+  }]);
+
+})();

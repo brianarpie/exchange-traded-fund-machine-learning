@@ -14,7 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require angular
+//= require angular-resource
 //= require angular-route
+//= require moment
+//= require angular-bootstrap/ui-bootstrap-tpls
+//= require underscore
 //= require d3
 //= require modules
 //= require_tree .
@@ -22,8 +26,12 @@
 
 // Angular Front-End Application
 //
-// require_directory ./etf_cannon
-// require_directory ./etf_cannon/controllers
+// require_directory ./resources
+//
+// require_directory ./chart
+// require_directory ./chart/controllers
+// require_directory ./chart/directives
+// require_directory ./chart/services
 //
 // require_directory ./welcome
 // require_directory ./welcome/controllers

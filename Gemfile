@@ -37,6 +37,10 @@ gem 'therubyracer'
 # Devise User Auth. Gem
 gem 'devise'
 
+# angular ui bootstrap rails
+# gem 'angular-ui-bootstrap-rails'
+gem 'less-rails-bootstrap'
+
 group :development, :test do
   gem 'pry'
   gem 'pry-rails'
