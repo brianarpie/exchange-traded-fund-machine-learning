@@ -5,6 +5,7 @@ before_script:
   - npm install karma-requirejs
   - npm install karma-phantomjs-launcher
   - psql -c 'create database etf_test;' -U postgres
+  - bower install
 
 script:
   - bundle exec rspec spec
