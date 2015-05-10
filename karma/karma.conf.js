@@ -21,6 +21,7 @@ module.exports = function(config) {
       'vendor/assets/javascripts/angular-bootstrap/ui-bootstrap-tpls.js',
       'vendor/assets/javascripts/angular-mocks/angular-mocks.js',
       'vendor/assets/javascripts/moment/moment.js',
+      'vendor/assets/javascripts/underscore/underscore.js',
       'app/assets/javascripts/modules.js',
       'app/assets/javascripts/**/*.js',
       'spec/javascripts/**/*Spec.js'
@@ -67,7 +68,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome', 'PhantomJS'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
