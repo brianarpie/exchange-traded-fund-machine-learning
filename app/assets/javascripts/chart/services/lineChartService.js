@@ -4,8 +4,17 @@
 
   var app = angular.module("ChartApp");
 
-  app.service("LineChartService", function() {
+  app.service("LineChartService", [
+    "HoldingRsrc", function(HoldingRsrc) {
     
-  });
+    // this.
+
+    // function init() {
+      
+    // }
+
+    // init();
+    
+  }]);
 
 })();

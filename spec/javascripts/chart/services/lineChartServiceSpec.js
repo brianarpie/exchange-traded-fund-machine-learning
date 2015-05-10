@@ -10,6 +10,8 @@
       $scope = $rootScope.$new();
     }));
 
+    // it('should have an endpoint for one')
+
   });
 
 })();

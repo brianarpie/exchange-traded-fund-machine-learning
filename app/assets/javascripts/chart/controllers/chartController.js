@@ -5,20 +5,18 @@
   var app = angular.module("ChartApp");
 
   app.controller("ChartController", [
-  "$scope", "ChartMetricService",
-  function($scope, ChartMetricService) {
+  "$scope", "LineChartService",
+  function($scope, LineChartService) {
 
     function getAllHoldings() {
-      ChartMetricService.getHoldings().then(
-        function(holdings) {
-          $scope.holdings = _.filter(holdings, function(holding) {
-            return holding.name; // filter out $promise objects etc.
-          });
-      }); 
+
     }
 
     function init() {
-      getAllHoldings();
+      // getAllHoldings();
+      $scope.$watch('selectedHolding', function(newSelectedHolding) {
+
+      });
       $scope.selectedHolding = "STOCK";
     }
 
