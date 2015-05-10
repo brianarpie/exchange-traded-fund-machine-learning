@@ -11,7 +11,7 @@
       $controller = $injector.get('$controller');
       $scope = $rootScope.$new();
 
-      $controller('DateRangeController', {
+      $controller('DateRangeCtrl', {
         '$scope': $scope
       });
     }));

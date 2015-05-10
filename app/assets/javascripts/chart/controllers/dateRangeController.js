@@ -4,7 +4,7 @@
 
   var app = angular.module("ChartApp");
 
-  app.controller("DateRangeController", ["$scope", function($scope) {
+  app.controller("DateRangeCtrl", ["$scope", function($scope) {
 
     function setDefaultDateRange() {
       $scope.startDate = moment().subtract(1, 'year').format("YYYY-MM-DD");

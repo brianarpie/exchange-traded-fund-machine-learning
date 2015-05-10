@@ -1,4 +1,5 @@
 <div class="chart-app-index">
+  <line-chart></line-chart>
   <div class="controls">
 
     <div class="btn-group" dropdown is-open="status.isopen">
@@ -19,7 +20,7 @@
     </div>
 
     <!-- TODO: wrap this in a directive. -->
-    <div ng-controller="DateRangeController" class="">
+    <div ng-controller="DateRangeCtrl" class="date-range-pickers">
       <input type="text"
              class="start-date-picker"
              datepicker-popup="{{datepickerFormat}}"
@@ -27,7 +28,7 @@
              is-open="startDateOpened"
              max-date="endDate" 
              readonly="readonly" />
-      <span class="input-group-btn">
+      <span class="input-group-btn start-date-btn">
         <button type="button" class="btn btn-default" ng-click="openStartDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
       </span>
 
@@ -38,7 +39,7 @@
              is-open="endDateOpened"
              min-date="startDate" 
              readonly="readonly" />
-      <span class="input-group-btn">
+      <span class="input-group-btn end-date-btn">
         <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
       </span>
     </div>

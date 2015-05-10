@@ -32,7 +32,7 @@
         function configD3LineFunc() {
           return d3.svg.line()
                   .x(function(d, i) {
-                    return d.;
+                    return d;
                   })
                   .y(function(d, i) {
                     return d;

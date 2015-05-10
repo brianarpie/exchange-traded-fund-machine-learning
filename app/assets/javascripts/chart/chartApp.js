@@ -11,7 +11,7 @@
       $locationProvider.html5Mode(true);
       $routeProvider.when('/', {
         templateUrl: '/assets/chart/pages/index.html',
-        controller: 'ChartController'
+        controller: 'ChartCtrl'
       });
     }
   ]);

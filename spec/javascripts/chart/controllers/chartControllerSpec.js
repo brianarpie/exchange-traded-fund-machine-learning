@@ -3,19 +3,19 @@
   "use strict";
 
   describe("Chart Controller Unit Test", function() {
-    var $rootScope, $scope, $controller, LineChartService;
+    var $rootScope, $scope, $controller, LineChartSrvc;
 
     beforeEach(module("ChartApp"));
     beforeEach(inject(function($injector) {
       $rootScope = $injector.get('$rootScope');
       $scope = $rootScope.$new();
       $controller = $injector.get('$controller');
-      LineChartService = $inject.get('LineChartService');
+      LineChartSrvc = $injector.get('LineChartSrvc');
 
       spyOn($scope, '$watch');
-      // spyOn(LineChartService, 'getHoldingData');
+      // spyOn(LineChartSrvc, 'getHoldingData');
 
-      $controller('ChartController', {
+      $controller('ChartCtrl', {
         "$scope": $scope
       });
     }));
