@@ -3,7 +3,9 @@
   "use strict";
 
   describe("Line Chart Service Unit Test", function() {
-    var $rootScope, $scope, $httpBackend, LineChartSrvc, HistoricalPriceRsrc, ChartSubscriptionSrvc;
+    
+    var $rootScope, $scope, $httpBackend, 
+      LineChartSrvc, HistoricalPriceRsrc, ChartSubscriptionSrvc;
     beforeEach(module("ChartApp"));
     beforeEach(inject(function($injector) {
       $rootScope = $injector.get("$rootScope");

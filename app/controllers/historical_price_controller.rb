@@ -11,7 +11,7 @@ class HistoricalPriceController < ApplicationController
       begin
         holding = Holding.where('name = ?', symbol).first
         historical_prices = holding.historical_prices
-        if start_date && end_date
+        if !start_date.blank? && !end_date.blank?
           historical_prices = historical_prices.where(date: start_date..end_date) 
         end
         format.json { render json: historical_prices }

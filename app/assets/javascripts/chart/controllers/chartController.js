@@ -7,14 +7,17 @@
   app.controller("ChartCtrl", [
   "$scope", "LineChartSrvc", "ChartSubscriptionSrvc", "HoldingRsrc",
   function($scope, LineChartSrvc, ChartSubscriptionSrvc, HoldingRsrc) {
-    function getAllHoldings() {
-
+    function fetchHoldings() {
+      HoldingRsrc.get().$promise.then(function(data) {
+        $scope.holdings = data;
+      });
     }
 
     function init() {
-      $scope.$watch('selectedHolding', function(newSelectedHolding) {
-        if (newSelectedHolding)
-          ChartSubscriptionSrvc.publish("holdingChanged", newSelectedHolding);
+      fetchHoldings();
+      $scope.$watch('selectedHolding', function(holding) {
+        if (holding)
+          ChartSubscriptionSrvc.publish("holdingChanged", holding);
       });
       // $scope.selectedHolding = "STOCK";
     }
