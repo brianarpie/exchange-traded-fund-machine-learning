@@ -13,9 +13,10 @@
 
     function init() {
       $scope.$watch('selectedHolding', function(newSelectedHolding) {
-        ChartSubscriptionSrvc.publish("holdingChanged", newSelectedHolding);
+        if (newSelectedHolding)
+          ChartSubscriptionSrvc.publish("holdingChanged", newSelectedHolding);
       });
-      $scope.selectedHolding = "STOCK";
+      // $scope.selectedHolding = "STOCK";
     }
 
     init();

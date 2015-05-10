@@ -5,19 +5,31 @@
   var app = angular.module("ChartApp");
 
   app.service("LineChartSrvc", [
-    "ChartSubscriptionSrvc", function(ChartSubscriptionSrvc) {
+    "ChartSubscriptionSrvc", "HistoricalPriceRsrc", function(ChartSubscriptionSrvc, HistoricalPriceRsrc) {
 
     var onUpdateChartCallbacks = [];
+    var queryContainer = {
+      start_date: null,
+      end_date: null,
+      symbol: null
+    };
 
-    function updateChart() {
+    function updateChart(newDatum) {
       var lineChartData;
-      _.each(onUpdateChartCallbacks, function(callback) {
-        callback(lineChartData);
+      _.each(newDatum, function(datum, key) {
+        queryContainer[key] = datum;
+      });
+
+      HistoricalPriceRsrc.get(queryContainer).$promise.then(function(data) {
+        _.each(onUpdateChartCallbacks, function(callback) {
+          callback(data);
+        });
       });
     }
 
     function updateHolding(holdingName) {
-      // updateChart({holding});
+      if (_.isString(holdingName))
+        updateChart({symbol:holdingName});
     }
 
     this.onUpdateChart = function(callback) {
@@ -31,6 +43,7 @@
     
     function init() {
       ChartSubscriptionSrvc.subscribe("holdingChanged", updateHolding);
+      // ChartSubscriptionSrvc.publish("holdingChanged", "SCTY");
     }
 
     init();

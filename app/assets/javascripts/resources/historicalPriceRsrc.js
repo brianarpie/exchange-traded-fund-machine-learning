@@ -9,7 +9,7 @@
     "$cacheFactory",
     function($resource, $cacheFactory){
       var historicalPriceRsrc;
-      var route = "/api/historical_price.json";
+      var route = "/api/historical_price.json?symbol=:symbol&start_date=:start_date&end_date=:end_date";
       var cache = $cacheFactory.get("HistoricalPriceRsrc");
 
       if ( !cache ) {
@@ -18,8 +18,9 @@
 
       historicalPriceRsrc = $resource(route, {}, {
         'get': {
-          method: 'get',
-          cache: cache
+          method: 'GET',
+          cache: cache,
+          isArray: true
         }
       });
 

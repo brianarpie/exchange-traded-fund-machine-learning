@@ -18,8 +18,9 @@
 
       historicalPercentageRsrc = $resource(route, {}, {
         'get': {
-          method: 'get',
-          cache: cache
+          method: 'GET',
+          cache: cache,
+          isArray: true
         }
       });
 
