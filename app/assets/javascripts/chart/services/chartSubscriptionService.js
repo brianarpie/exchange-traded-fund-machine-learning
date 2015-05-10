@@ -4,7 +4,6 @@
 
   angular.module("ChartApp").service("ChartSubscriptionSrvc", [
     function() {
-      console.log("init subscribe")
       
       var chartEvents = {
         holdingChanged: {

@@ -12,10 +12,8 @@
     }
 
     function init() {
-      // getAllHoldings();
-      // $scope.holdings = LineChartSrvc();
       $scope.$watch('selectedHolding', function(newSelectedHolding) {
-        LineChartSrvc.updateSelectedHolding(newSelectedHolding);
+        ChartSubscriptionSrvc.publish("holdingChanged", newSelectedHolding);
       });
       $scope.selectedHolding = "STOCK";
     }
