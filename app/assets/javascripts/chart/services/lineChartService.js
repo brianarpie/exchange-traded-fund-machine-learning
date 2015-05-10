@@ -5,11 +5,7 @@
   var app = angular.module("ChartApp");
 
   app.service("LineChartSrvc", [
-    "HoldingRsrc", function(HoldingRsrc) {
-
-    this.updateSelectedHolding = function(newHolding) {
-
-    };
+    "ChartSubscriptionSrvc", function(ChartSubscriptionSrvc) {
 
     var onUpdateChartCallbacks = [];
 
@@ -18,6 +14,10 @@
       _.each(onUpdateChartCallbacks, function(callback) {
         callback(lineChartData);
       });
+    }
+
+    function updateHolding(holdingName) {
+      // updateChart({holding});
     }
 
     this.onUpdateChart = function(callback) {
@@ -30,7 +30,7 @@
     };
     
     function init() {
-      
+      ChartSubscriptionSrvc.subscribe("holdingChanged", updateHolding);
     }
 
     init();
