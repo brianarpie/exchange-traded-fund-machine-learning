@@ -32,6 +32,11 @@
         updateChart({symbol:holdingName});
     }
 
+    function updateDateRange(dates) {
+      if (_.isObject(dates))
+        updateChart(dates);
+    }
+
     this.onUpdateChart = function(callback) {
       onUpdateChartCallbacks.push(callback);
       return {
@@ -43,7 +48,7 @@
     
     function init() {
       ChartSubscriptionSrvc.subscribe("holdingChanged", updateHolding);
-      // ChartSubscriptionSrvc.publish("holdingChanged", "SCTY");
+      ChartSubscriptionSrvc.subscribe("dateChanged", updateDateRange);
     }
 
     init();

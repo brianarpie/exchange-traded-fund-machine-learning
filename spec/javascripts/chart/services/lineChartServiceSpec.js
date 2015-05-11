@@ -29,7 +29,13 @@
      });
     
     it('should subscribe to changes in the selected holding', function() {
-      expect(ChartSubscriptionSrvc.subscribe.calls.mostRecent().args[0]).toEqual("holdingChanged");
+      expect(ChartSubscriptionSrvc.subscribe.calls.first().args[0]).toEqual("holdingChanged");
+      $httpBackend.flush();
+    });
+
+    it('should subscribe to changes in the date range', function() {
+      expect(ChartSubscriptionSrvc.subscribe.calls.mostRecent().args[0]).toEqual("dateChanged");
+      $httpBackend.flush();
     });
 
     it('should get the historical price data when the holding changes', function() {

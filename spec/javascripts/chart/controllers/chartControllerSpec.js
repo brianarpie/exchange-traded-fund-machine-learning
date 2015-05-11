@@ -17,6 +17,7 @@
 
       spyOn(ChartSubscriptionSrvc, "publish");
 
+      $httpBackend.expect("GET", /\/api\/historical_price\.json/).respond({});
       $httpBackend.expect("GET", /\/api\/holding.json/).respond({});
 
       $controller('ChartCtrl', {
@@ -24,7 +25,7 @@
       });
     }));
 
-    it('should publish changes to selectedHolding to ChartSubscriptionSrvc', function() {
+    it('should publish changes when selected holding changes', function() {
       expect(ChartSubscriptionSrvc.publish).not.toHaveBeenCalled();
       $scope.$apply(function() {
         $scope.selectedHolding = "BEI";
