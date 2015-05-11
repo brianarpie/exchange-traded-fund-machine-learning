@@ -4,7 +4,7 @@
 
   var app = angular.module("ChartApp");
 
-  app.controller("DateRangeCtrl", ["$scope", function($scope) {
+  app.controller("DateRangeCtrl", ["$scope", "ChartSubscriptionSrvc", function($scope, ChartSubscriptionSrvc) {
 
     function setDefaultDateRange() {
       $scope.startDate = moment().subtract(1, 'year').format("YYYY-MM-DD");
@@ -27,11 +27,15 @@
     }
 
     function dateRangeWatcher() {
-      $scope.$watch('startDate', function() {
-        // console.log($scope.startDate);
+      $scope.$watch('startDate', function(date) {
+        ChartSubscriptionSrvc.publish("dateChanged", {
+          start_date: date
+        });
       });
-      $scope.$watch('endDate', function() {
-        // api call.?
+      $scope.$watch('endDate', function(date) {
+        ChartSubscriptionSrvc.publish("dateChanged", {
+          end_date: date
+        });
       });
     }
     

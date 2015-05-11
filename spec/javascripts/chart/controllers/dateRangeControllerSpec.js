@@ -12,6 +12,8 @@
       ChartSubscriptionSrvc = $injector.get("ChartSubscriptionSrvc");
       $scope = $rootScope.$new();
 
+      spyOn(ChartSubscriptionSrvc, 'publish').and.callThrough();
+
       $controller('DateRangeCtrl', {
         '$scope': $scope
       });
@@ -32,9 +34,14 @@
     });
 
     it('should publish date range changes to ChartSubscriptionSrvc', function() {
-      $scope.endDate = moment().format("YYYY-MM-DD");
       $scope.startDate = moment().subtract(30, "days").format("YYYY-MM-DD");
+      $scope.endDate = moment().format("YYYY-MM-DD");
+      $scope.$digest();
 
+      expect(ChartSubscriptionSrvc.publish)
+        .toHaveBeenCalledWith("dateChanged", {start_date: $scope.startDate});
+      expect(ChartSubscriptionSrvc.publish)
+        .toHaveBeenCalledWith("dateChanged", {end_date: $scope.endDate});
       
     });
   });

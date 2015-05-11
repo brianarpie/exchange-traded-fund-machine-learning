@@ -9,6 +9,10 @@
         holdingChanged: {
           eventHandlers: [],
           cache: []
+        },
+        dateChanged: {
+          eventHandlers: [],
+          cache: []
         }
       };
 
