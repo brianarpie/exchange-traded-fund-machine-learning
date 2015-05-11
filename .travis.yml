@@ -4,6 +4,7 @@ before_script:
   - npm install karma
   - npm install bower
   - npm install karma-phantomjs-launcher
+  - npm install karma-ng-html2js-preprocessor
   - psql -c 'create database etf_test;' -U postgres
   - node_modules/bower/bin/bower install
 
