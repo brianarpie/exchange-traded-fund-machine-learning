@@ -4,11 +4,12 @@
 
   describe("Date Range Controller Unit Tests", function() {
 
-    var $rootScope, $scope, $controller;
+    var $rootScope, $scope, $controller, ChartSubscriptionSrvc;
     beforeEach(module("ChartApp"));
     beforeEach(inject(function($injector) {
       $rootScope = $injector.get('$rootScope');
       $controller = $injector.get('$controller');
+      ChartSubscriptionSrvc = $injector.get("ChartSubscriptionSrvc");
       $scope = $rootScope.$new();
 
       $controller('DateRangeCtrl', {
@@ -28,6 +29,13 @@
 
     it('should set datepickerFormat to something', function() {
       expect($scope.datepickerFormat).not.toBe(undefined);
+    });
+
+    it('should publish date range changes to ChartSubscriptionSrvc', function() {
+      $scope.endDate = moment().format("YYYY-MM-DD");
+      $scope.startDate = moment().subtract(30, "days").format("YYYY-MM-DD");
+
+      
     });
   });
 

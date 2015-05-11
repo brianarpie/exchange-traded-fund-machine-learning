@@ -19,7 +19,6 @@
         if (holding)
           ChartSubscriptionSrvc.publish("holdingChanged", holding);
       });
-      // $scope.selectedHolding = "STOCK";
     }
 
     init();
