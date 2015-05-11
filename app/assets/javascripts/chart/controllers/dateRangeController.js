@@ -29,12 +29,12 @@
     function dateRangeWatcher() {
       $scope.$watch('startDate', function(date) {
         ChartSubscriptionSrvc.publish("dateChanged", {
-          start_date: date
+          start_date: moment(date).format("YYYY-MM-DD")
         });
       });
       $scope.$watch('endDate', function(date) {
         ChartSubscriptionSrvc.publish("dateChanged", {
-          end_date: date
+          end_date: moment(date).format("YYYY-MM-DD")
         });
       });
     }

@@ -19,12 +19,13 @@
       _.each(newDatum, function(datum, key) {
         queryContainer[key] = datum;
       });
-
-      HistoricalPriceRsrc.get(queryContainer).$promise.then(function(data) {
-        _.each(onUpdateChartCallbacks, function(callback) {
-          callback(data);
+      if (queryContainer.symbol) {
+        HistoricalPriceRsrc.get(queryContainer).$promise.then(function(data) {
+          _.each(onUpdateChartCallbacks, function(callback) {
+            callback(data);
+          });
         });
-      });
+      }
     }
 
     function updateHolding(holdingName) {
@@ -36,6 +37,14 @@
       if (_.isObject(dates))
         updateChart(dates);
     }
+
+    this.getMinPrice = function(data) {
+      return _.min(_.pluck(data, "low"));
+    };
+
+    this.getMaxPrice = function(data) {
+      return _.max(_.pluck(data, "high"));
+    };
 
     this.onUpdateChart = function(callback) {
       onUpdateChartCallbacks.push(callback);

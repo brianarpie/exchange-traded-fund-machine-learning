@@ -7,6 +7,12 @@ module.exports = function(config) {
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '../',
 
+    plugins: [
+      'karma-jasmine',
+      'karma-phantomjs-launcher',
+      'karma-spec-reporter',
+      'karma-ng-html2js-preprocessor'
+    ],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -15,6 +21,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'vendor/assets/javascripts/jquery/dist/jquery.js',
       'vendor/assets/javascripts/angular/angular.js',
       'vendor/assets/javascripts/angular-resource/angular-resource.js',
       'vendor/assets/javascripts/angular-route/angular-route.min.js',
@@ -22,7 +29,9 @@ module.exports = function(config) {
       'vendor/assets/javascripts/angular-mocks/angular-mocks.js',
       'vendor/assets/javascripts/moment/moment.js',
       'vendor/assets/javascripts/underscore/underscore.js',
+      'vendor/assets/javascripts/d3/d3.js',
       'app/assets/javascripts/modules.js',
+      'app/assets/javascripts/**/*directive.html',
       'app/assets/javascripts/**/*.js',
       'spec/javascripts/**/*Spec.js'
     ],
@@ -36,8 +45,16 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'app/assets/javascripts/**/*directive.html': ['ng-html2js']
     },
+    
 
+    ngHtml2JsPreprocessor: {
+      cacheIdFromPath: function(filepath) {
+        return "/assets" + filepath.split('/javascripts').pop();
+      },
+      moduleName: 'Templates'
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

@@ -17,8 +17,8 @@
 
       spyOn(ChartSubscriptionSrvc, "publish");
 
-      $httpBackend.expect("GET", /\/api\/historical_price\.json/).respond({});
-      $httpBackend.expect("GET", /\/api\/holding.json/).respond({});
+      $httpBackend.when("GET", /\/api\/historical_price\.json/).respond({});
+      $httpBackend.when("GET", /\/api\/holding.json/).respond({});
 
       $controller('ChartCtrl', {
         "$scope": $scope,
