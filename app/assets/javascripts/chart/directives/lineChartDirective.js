@@ -12,15 +12,16 @@
 
         function drawChart(data) {
           chart.data = data;
-          
+          chart.margin = {top: 0, right: 0, bottom: 30, left: 30};
+
           if (_.isEmpty(chart.data))
             return;
 
           if (!chart.root)
             chart.root = buildChartContainer();
 
-          chart.height = $element.find('.chart-root').height();
-          chart.width = $element.find('.chart-root').width();
+          chart.height = $element.find('.chart-root').height() - chart.margin.top - chart.margin.bottom;
+          chart.width = $element.find('.chart-root').width() - chart.margin.left - chart.margin.right;
 
           // TODO: modify these functions so that chart.data isn't passed around ?
 
@@ -28,18 +29,22 @@
           var maxPrice = LineChartSrvc.getMaxPrice(chart.data);
 
           chart.yScale = buildYScale(minPrice, maxPrice);
-
-
-          chart.timeScale = buildTimeScale()
+          chart.xScale = buildTimeScale();
 
           chart.xAxis = buildXAxis();
           chart.yAxis = buildYAxis();
 
-          drawXAxis();
-          drawYAxis();
+          // TODO: replace with a tooltip
+          // drawXAxis();
 
-          chart.line = configD3LineFunc();
-          // lineDrawn = drawLine(svg, lineFunc);
+          if ($element.find('.y.axis').length === 0)
+            drawYAxis();
+
+          updateXAxis();
+          updateYAxis();
+
+          chart.lineFunction = getLineFunction();
+          drawLines();
         }
 
         function buildChartContainer() {
@@ -52,8 +57,10 @@
 
         function buildXAxis() {
           return d3.svg.axis()
-            .scale(chart.timeScale)
+            .scale(chart.xScale)
             .orient("bottom")
+            .ticks(d3.time.days, 1)
+            .tickFormat(d3.time.format('%m%d'))
             .tickSize(-chart.height, 0, 0);
         }
 
@@ -65,13 +72,16 @@
         }
 
         function updateXAxis() {
-
+          chart.root.select('.x.axis')
+            .transition()
+            .duration(500)
+            .call(chart.xAxis);
         }
 
         function buildYScale(priceMin, priceMax) {
           return d3.scale.linear()
             .domain([priceMin, priceMax])
-            .range([chart.height, 30]);
+            .range([chart.height, 0]);
         }
 
         function buildYAxis() {
@@ -85,45 +95,57 @@
         function drawYAxis() {
           chart.root.append("g")
             .attr("class", "y axis")
+            .attr('transform', 'translate('+chart.margin.left+',0)')
             .call(chart.yAxis);
         }
 
         function updateYAxis() {
-
+          chart.root.select('.y.axis')
+            .transition()
+            .duration(500)
+            .call(chart.yAxis);
         }
 
         function buildTimeScale() {
           return d3.time.scale()
-            .domain([chart.data[0].date, chart.data[chart.data.length - 1].date])
-            .range([30, chart.width]);
+            .domain([moment(chart.data[0].date).toDate(), moment(chart.data[chart.data.length - 1].date).toDate()])
+            .rangeRound([30, chart.width]);
         }
 
-        function drawChartContainer(width, height) {
-          return d3.select(".chart-root")
-                  .append("svg")
-                  .attr("width", width)
-                  .attr("height", height);
-        }
-
-        function configD3LineFunc() {
+        function getLineFunction() {
           return d3.svg.line()
-                  .x(function(d, i) {
-                    return d;
-                  })
-                  .y(function(d, i) {
-                    return d;
-                  })
-                  .interpolate("basis");
+            .x(function(d, i) {
+              return chart.xScale(moment(d.date).toDate());
+            })
+            .y(function(d, i) {
+              return chart.yScale(d.close);
+            });
         }
 
-        function drawLine() {
-          return chart.root.append("path")
-                    .attr({
-                      d: chart.line(chart.data),
-                      "stroke": "purple",
-                      "stroke-width": 2,
-                      "fill": "none"
-                    });
+        function drawLines() {
+          chart.lines = chart.root.selectAll("path.lines")
+            .data([chart.data]);
+
+          chart.lines.enter().append("path")
+            .attr('class', 'lines')
+            .attr('stroke', 'pink')
+            .attr('stroke-width', 2)
+            .attr('fill', 'none')
+            .attr('opacity', 0);
+          
+          chart.lines.transition()
+            .duration(600)
+            .attr('d', chart.lineFunction)
+            .attr('opacity', 1)
+            .attr('stroke', 'pink')
+            .attr('stroke-width', 2)
+            .attr('fill', 'none');
+
+          chart.lines.exit()
+            .transition()
+            .duration(600)
+            .attr('opacity', 0)
+            .remove();
         }
 
         function init() {          
