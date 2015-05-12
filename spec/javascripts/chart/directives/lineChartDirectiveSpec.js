@@ -48,8 +48,8 @@
       expect(lineChartElement.find(".y.axis").length).toBe(1);
     });
 
-    it('should draw a line from (date #1, close price #1) to (date #2, close price #2)', function() {
-      expect(lineChartElement.find('.lines').length).toBe(1);
+    it('should draw (data.length - 1) lines', function() {
+      expect(lineChartElement.find('.lines').length).toBe(fixtureData.length - 1);
     });
 
   });
