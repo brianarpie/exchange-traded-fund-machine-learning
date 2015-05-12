@@ -1,14 +1,17 @@
 line-chart {
-
   .line-chart {
     height: 480px;
     width: 100%;
-    overflow: show;
-  }
 
-  svg.chart-root {
-    .y.axis .tick line {
-      stroke: #EFEFEF;
+    svg.chart-root {
+      .axis .tick line {
+        stroke: #EFEFEF;
+      }
+      path.lines {
+        stroke: pink;
+        stroke-width: 2;
+        fill: none;
+      }
     }
   }
 }

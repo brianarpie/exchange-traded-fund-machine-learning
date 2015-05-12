@@ -44,6 +44,10 @@
       $httpBackend.verifyNoOutstandingRequest();
     });
 
+    it('should draw an x-axis', function() {
+      expect(lineChartElement.find('.x.axis').length).toBe(1);
+    });
+
     it('should draw a y-axis', function() {
       expect(lineChartElement.find(".y.axis").length).toBe(1);
     });

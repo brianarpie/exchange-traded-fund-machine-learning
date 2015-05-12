@@ -11,8 +11,10 @@
         var chart = {};
 
         function drawChart(data) {
+          
           chart.data = data;
-          chart.margin = {top: 0, right: 0, bottom: 30, left: 30};
+
+          chart.margin = {top: 0, right: 25, bottom: 30, left: 5};
 
           if (_.isEmpty(chart.data))
             return;
@@ -34,8 +36,10 @@
           chart.xAxis = buildXAxis();
           chart.yAxis = buildYAxis();
 
-          // TODO: replace with a tooltip
-          // drawXAxis();
+          // TODO: create a tooltip
+
+          if ($element.find('.x.axis').length === 0)
+            drawXAxis();
 
           if ($element.find('.y.axis').length === 0)
             drawYAxis();
@@ -59,8 +63,8 @@
           return d3.svg.axis()
             .scale(chart.xScale)
             .orient("bottom")
-            .ticks(d3.time.days, 1)
-            .tickFormat(d3.time.format('%m%d'))
+            .ticks(d3.time.months, 1)
+            .tickFormat(d3.time.format('%b \'%y'))
             .tickSize(-chart.height, 0, 0);
         }
 
@@ -87,15 +91,14 @@
         function buildYAxis() {
           return d3.svg.axis()
             .scale(chart.yScale)
-            .orient("left")
-            .tickSize(-chart.width, 0, 0)
+            .orient("right")
+            .tickSize(chart.width, 0, 0)
             .tickFormat(function(d){ return "$" + d; });
         }
 
         function drawYAxis() {
           chart.root.append("g")
             .attr("class", "y axis")
-            .attr('transform', 'translate('+chart.margin.left+',0)')
             .call(chart.yAxis);
         }
 
@@ -123,23 +126,19 @@
         }
 
         function drawLines() {
-          chart.lines = chart.root.selectAll("path.lines")
+          chart.lines = chart.root
+            .selectAll("path.lines")
             .data([chart.data]);
 
-          chart.lines.enter().append("path")
-            .attr('class', 'lines')
-            .attr('stroke', 'pink')
-            .attr('stroke-width', 2)
-            .attr('fill', 'none')
-            .attr('opacity', 0);
+          chart.lines.enter()
+            .append("path")
+              .attr('class', 'lines')
+              .attr('opacity', 0);
           
           chart.lines.transition()
             .duration(600)
             .attr('d', chart.lineFunction)
-            .attr('opacity', 1)
-            .attr('stroke', 'pink')
-            .attr('stroke-width', 2)
-            .attr('fill', 'none');
+            .attr('opacity', 1);
 
           chart.lines.exit()
             .transition()
