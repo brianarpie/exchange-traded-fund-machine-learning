@@ -27,11 +27,13 @@
 
           // TODO: modify these functions so that chart.data isn't passed around ?
 
+          // TODO: have LineChartSrvc spit out the data as x and y? along with the other info in another object for tooltip display
+
           var minPrice = LineChartSrvc.getMinPrice(chart.data);
           var maxPrice = LineChartSrvc.getMaxPrice(chart.data);
 
+          chart.xScale = buildXScale();
           chart.yScale = buildYScale(minPrice, maxPrice);
-          chart.xScale = buildTimeScale();
 
           chart.xAxis = buildXAxis();
           chart.yAxis = buildYAxis();
@@ -59,33 +61,25 @@
               .attr("class", "chart-container");
         }
 
-        function buildXAxis() {
-          return d3.svg.axis()
-            .scale(chart.xScale)
-            .orient("bottom")
-            .ticks(d3.time.months, 1)
-            .tickFormat(d3.time.format('%b \'%y'))
-            .tickSize(-chart.height, 0, 0);
-        }
-
-        function drawXAxis() {
-          chart.root.append("g")
-            .attr('class', 'x axis')
-            .attr('transform', 'translate(0, ' + chart.height + ')')
-            .call(chart.xAxis);
-        }
-
-        function updateXAxis() {
-          chart.root.select('.x.axis')
-            .transition()
-            .duration(500)
-            .call(chart.xAxis);
+        function buildXScale() {
+          return d3.time.scale()
+            .domain([moment(chart.data[0].date).toDate(), moment(chart.data[chart.data.length - 1].date).toDate()])
+            .rangeRound([30, chart.width]);
         }
 
         function buildYScale(priceMin, priceMax) {
           return d3.scale.linear()
             .domain([priceMin, priceMax])
             .range([chart.height, 0]);
+        }
+
+        function buildXAxis() {
+          return d3.svg.axis()
+            .scale(chart.xScale)
+            .orient("bottom")
+            .ticks(d3.time.months, 1)
+            .tickFormat(d3.time.format(getTimeFormatter()))
+            .tickSize(-chart.height, 0, 0);
         }
 
         function buildYAxis() {
@@ -96,10 +90,24 @@
             .tickFormat(function(d){ return "$" + d; });
         }
 
+        function drawXAxis() {
+          chart.root.append("g")
+            .attr('class', 'x axis')
+            .attr('transform', 'translate(0, ' + chart.height + ')')
+            .call(chart.xAxis);
+        }
+
         function drawYAxis() {
           chart.root.append("g")
             .attr("class", "y axis")
             .call(chart.yAxis);
+        }
+
+        function updateXAxis() {
+          chart.root.select('.x.axis')
+            .transition()
+            .duration(500)
+            .call(chart.xAxis);
         }
 
         function updateYAxis() {
@@ -107,12 +115,6 @@
             .transition()
             .duration(500)
             .call(chart.yAxis);
-        }
-
-        function buildTimeScale() {
-          return d3.time.scale()
-            .domain([moment(chart.data[0].date).toDate(), moment(chart.data[chart.data.length - 1].date).toDate()])
-            .rangeRound([30, chart.width]);
         }
 
         function getLineFunction() {
@@ -147,6 +149,17 @@
             .remove();
         }
 
+        // TODO: this needs work.
+        function getTimeFormatter() {
+          var milliseconds =  moment(
+            moment(chart.data[chart.data.length - 1].date) - 
+            moment(chart.data[0].date)
+          );
+          var years = ( ( ( ( ( milliseconds / 1000 ) / 60 ) / 60 )/ 24 ) / 365 );
+
+          return (years < 2) ? "%b \'%y" : "%Y";
+        }
+        
         function init() {          
           LineChartSrvc.onUpdateChart(function(data) {
             drawChart(data);
