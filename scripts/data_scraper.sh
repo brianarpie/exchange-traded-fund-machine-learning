@@ -1,5 +1,5 @@
 #!/bin/sh
-DATE="2015-05-12"
+DATE="2015-05-14"
 # TODAY=`date +%Y-%m-%d`
 # declare -a holdings=("IVV" "IJH" "IJR" "IXJ" "IXC" "KXI" "IXG" "IGF" "MXI" "IXN" "IXP" "JXI" "IFGL" "FXI" "IEV" "ITF" "EWT" "EWW" "DGRO" "IEMG" "IXUS")
 # for ticker in "${holdings[@]}"
