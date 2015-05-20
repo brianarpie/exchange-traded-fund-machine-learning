@@ -18,10 +18,11 @@ holdings.each do |x|
   }])
 end
 
+ #["Date", "Open", "High", "Low", "Close", "Volume", "Adj Close"]
 sune = CSV.read('lib/assets/historical-price-data/SUNE-2015-03-23.csv')
 fslr = CSV.read('lib/assets/historical-price-data/FSLR-2015-03-23.csv')
 scty = CSV.read('lib/assets/historical-price-data/SCTY-2015-03-23.csv')
- #["Date", "Open", "High", "Low", "Close", "Volume", "Adj Close"]
+ 
 scty.shift
 
 sune.shift
