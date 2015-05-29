@@ -21,7 +21,6 @@
 //= require underscore
 //= require d3
 //= require modules
-//= require_tree .
 //
 
 // Angular Front-End Application
