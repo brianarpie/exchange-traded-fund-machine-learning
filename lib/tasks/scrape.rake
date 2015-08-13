@@ -41,12 +41,12 @@ namespace :scrape do
           total_net_assets = row.last.slice 1, row.last.length
         end
         if row.first.index(/([A-Z]|[0-9]){2,5}/) == 0
-          save_row_to_database(row)
+          save_row_to_database(row, @date)
         end
       end
     end
 
-    def save_row_to_database(row)
+    def save_row_to_database(row, date)
       @holding = Holding.where(name: row.first).first
       if @holding.nil?
         @holding = Holding.create({name: row.first})
@@ -55,7 +55,8 @@ namespace :scrape do
       if @etf_holding.nil?
         @etf_holding = EtfHolding.create({ etf_id: @etf.id, holding_id: @holding.id })
       end
-      HistoricalPercentage.create({ value: row[4], date: @date, etf_holding_id: @etf_holding.id })
+      HistoricalPercentage.create({ value: row[4], date: date, etf_holding_id: @etf_holding.id })
+      print "." # used for loading visualization
     end
 
     def url_generator(query)
