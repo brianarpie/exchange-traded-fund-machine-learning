@@ -5,7 +5,6 @@ namespace :scrape do
     require 'date'
     require 'csv'
     require 'uri'
-    require 'pry'
 
     def etf_query
       [
