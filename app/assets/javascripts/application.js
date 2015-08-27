@@ -25,12 +25,12 @@
 
 // Angular Front-End Application
 //
-// require_directory ./resources
+//= require_directory ./resources
 //
-// require_directory ./chart
-// require_directory ./chart/controllers
-// require_directory ./chart/directives
-// require_directory ./chart/services
+//= require_directory ./chart
+//= require_directory ./chart/controllers
+//= require_directory ./chart/directives
+//= require_directory ./chart/services
 //
-// require_directory ./welcome
-// require_directory ./welcome/controllers
+//= require_directory ./welcome
+//= require_directory ./welcome/controllers
