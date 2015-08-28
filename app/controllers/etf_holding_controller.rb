@@ -46,7 +46,8 @@ class EtfHoldingController < ApplicationController
   def show
     respond_to do |format|
       format.json {
-        render json: @etf_holding
+        render json: @etf_holding,
+        each_serializer: EtfHoldingSerializer
       }
     end
   end
