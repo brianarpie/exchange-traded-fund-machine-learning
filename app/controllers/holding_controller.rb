@@ -3,10 +3,19 @@ class HoldingController < ApplicationController
 
   # GET /api/holding.json
   def index
+    etf_id = params[:etf_id]
+
     respond_to do |format|
-      format.json {
-        render json: Holding.all
-      }
+      if etf_id
+        holdings = EtfHolding.where(etf_id: etf_id).inject([]) { |memo, etf_holding| memo.push(etf_holding.holding) }
+        format.json {
+          render json: holdings
+        }
+      else
+        format.json {
+          render json: Holding.all
+        }
+      end
     end
   end
 

@@ -10,6 +10,10 @@
           eventHandlers: [],
           cache: []
         },
+        etfChanged: {
+          eventHandlers: [],
+          cache: []
+        },
         dateChanged: {
           eventHandlers: [],
           cache: []

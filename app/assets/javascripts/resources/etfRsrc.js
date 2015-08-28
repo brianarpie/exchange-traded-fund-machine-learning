@@ -19,7 +19,8 @@
       etfRsrc = $resource(route, {}, {
         'get': {
           method: 'get',
-          cache: cache
+          cache: cache,
+          isArray: true
         }
       });
 

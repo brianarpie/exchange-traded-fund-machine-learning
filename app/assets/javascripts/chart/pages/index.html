@@ -9,11 +9,28 @@
               ng-disabled="disabled"
               dropdown-toggle 
               >
-              {{selectedHolding}} <span class="caret"></span>
+              {{selectedEtf.name}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="etf in etfs">
+          <a ng-click="$parent.selectedEtf = etf">
+            {{etf.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group" dropdown is-open="status.isopen2">
+      <button type="button" 
+              class="btn btn-primary dropdown-toggle" 
+              ng-disabled="disabled"
+              dropdown-toggle 
+              >
+              {{selectedHolding.name}} <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="holding in holdings">
-          <a ng-click="$parent.selectedHolding = holding.name">
+          <a ng-click="$parent.selectedHolding = holding">
             {{holding.name}}
           </a>
         </li>

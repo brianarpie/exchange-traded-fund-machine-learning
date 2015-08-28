@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'application#welcome'
 
   get '/welcome' => "application#welcome"
+  get '/chart', to: "application#chart"
 
   scope '/api' do
     resources :holding, controller: 'holding', except: [:new, :edit]
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
     resources :historical_percentage, controller: 'historical_percentage', except: [:new, :edit, :show]
   end
 
-  get '/chart', to: "application#chart"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

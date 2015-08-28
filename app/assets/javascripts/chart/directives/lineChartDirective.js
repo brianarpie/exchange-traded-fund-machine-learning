@@ -29,11 +29,14 @@
 
           // TODO: have LineChartSrvc spit out the data as x and y? along with the other info in another object for tooltip display
 
-          var minPrice = LineChartSrvc.getMinPrice(chart.data);
-          var maxPrice = LineChartSrvc.getMaxPrice(chart.data);
+          // var minPrice = LineChartSrvc.getMinPrice(chart.data);
+          // var maxPrice = LineChartSrvc.getMaxPrice(chart.data);
+          var minY = _.min(chart.data, "value").value
+          var maxY = _.max(chart.data, "value").value
+
 
           chart.xScale = buildXScale();
-          chart.yScale = buildYScale(minPrice, maxPrice);
+          chart.yScale = buildYScale(minY, maxY);
 
           chart.xAxis = buildXAxis();
           chart.yAxis = buildYAxis();
@@ -87,7 +90,7 @@
             .scale(chart.yScale)
             .orient("right")
             .tickSize(chart.width, 0, 0)
-            .tickFormat(function(d){ return "$" + d; });
+            .tickFormat(function(d){ return d.toFixed(2) + "%"; });
         }
 
         function drawXAxis() {
@@ -123,7 +126,7 @@
               return chart.xScale(moment(d.date).toDate());
             })
             .y(function(d, i) {
-              return chart.yScale(d.close);
+              return chart.yScale(d.value);
             });
         }
 

@@ -7,7 +7,7 @@
   app.controller("DateRangeCtrl", ["$scope", "ChartSubscriptionSrvc", function($scope, ChartSubscriptionSrvc) {
 
     function setDefaultDateRange() {
-      $scope.startDate = moment().subtract(1, 'year').format("YYYY-MM-DD");
+      $scope.startDate = moment().subtract(30, 'days').format("YYYY-MM-DD");
       $scope.endDate = moment().format("YYYY-MM-DD");
     }
 

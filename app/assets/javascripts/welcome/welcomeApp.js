@@ -1,7 +1,7 @@
 (function(){
 
   "use strict";
-
+  
   var app = angular.module("WelcomeApp");
 
   app.config([
