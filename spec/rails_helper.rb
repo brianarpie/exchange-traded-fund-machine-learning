@@ -3,10 +3,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+# require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
-
-require File.expand_path('../helpers/factory_girl_helper.rb', __FILE__)
-
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -28,6 +26,9 @@ require File.expand_path('../helpers/factory_girl_helper.rb', __FILE__)
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # required for Devise gem
+  config.include Devise::TestHelpers, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

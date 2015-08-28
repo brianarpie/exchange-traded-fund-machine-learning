@@ -39,6 +39,7 @@ gem 'devise'
 # gem 'angular-ui-bootstrap-rails'
 # gem 'twitter-bootstrap-rails'
 gem 'less-rails-bootstrap'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'pry'
