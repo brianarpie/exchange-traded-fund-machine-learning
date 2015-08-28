@@ -1,1 +1,1 @@
-{<img src="https://magnum.travis-ci.com/buwuwei/exchange-traded-farts.svg?token=AKiSa35xbqQMse2vmyjZ" alt="Build Status" />}[https://magnum.travis-ci.com/buwuwei/exchange-traded-farts]
+{<img src="https://magnum.travis-ci.com/buwuwei/exchange-traded-fund-machine-learning.svg?token=AKiSa35xbqQMse2vmyjZ" alt="Build Status" />}[https://magnum.travis-ci.com/buwuwei/exchange-traded-fund-machine-learning]
