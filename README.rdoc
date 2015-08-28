@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/buwuwei/exchange-traded-fund-machine-learning.svg?branch=master)](https://travis-ci.org/buwuwei/exchange-traded-fund-machine-learning)
+{<img src="https://travis-ci.org/buwuwei/exchange-traded-fund-machine-learning.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/buwuwei/exchange-traded-fund-machine-learning]
