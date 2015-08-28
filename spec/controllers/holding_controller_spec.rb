@@ -3,10 +3,12 @@ require 'rails_helper'
 RSpec.describe HoldingController, type: :controller do
   let(:holding) { FactoryGirl.create :holding, name: "PPP" }
   let(:holding_2) { FactoryGirl.create :holding, name: "OOO" }
+  let(:etf_holding) { FactoryGirl.create :etf_holding, etf_id: 1, holding_id: holding.id }
 
   before(:each) do
     holding
     holding_2
+    etf_holding
   end
 
   describe "GET #index" do
@@ -14,6 +16,12 @@ RSpec.describe HoldingController, type: :controller do
       get :index, format: :json
       assert_response :success
       assert_equal 2, JSON.parse(response.body).length
+    end
+
+    it "returns all holdings for a given etf if etf_id is specified" do
+      get :index, format: :json, etf_id: 1
+      assert_response :success
+      assert_equal 1, JSON.parse(response.body).length
     end
   end
 
