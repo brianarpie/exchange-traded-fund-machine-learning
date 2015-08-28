@@ -19,6 +19,7 @@
 
       $httpBackend.when("GET", /\/api\/historical_price\.json/).respond({});
       $httpBackend.when("GET", /\/api\/holding.json/).respond({});
+      $httpBackend.when("GET", /\/api\/etf.json/).respond({});
 
       $controller('ChartCtrl', {
         "$scope": $scope,
