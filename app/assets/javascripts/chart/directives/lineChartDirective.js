@@ -14,7 +14,7 @@
           
           chart.data = data;
 
-          chart.margin = {top: 0, right: 25, bottom: 30, left: 5};
+          chart.margin = {top: 15, right: 25, bottom: 30, left: 30};
 
           if (_.isEmpty(chart.data))
             return;
@@ -62,6 +62,8 @@
             .attr("height", "100%")
               .append("g")
               .attr("class", "chart-container");
+              // TODO: translate this to give it padding
+              // .attr('transform', 'translate(0, ' + chart.height + ')');
         }
 
         function buildXScale() {
@@ -72,15 +74,15 @@
 
         function buildYScale(priceMin, priceMax) {
           return d3.scale.linear()
-            .domain([priceMin, priceMax])
-            .range([chart.height, 0]);
+            .domain([priceMin * .99, priceMax * 1.01])
+            .range([chart.height, chart.margin.top]);
         }
 
         function buildXAxis() {
           return d3.svg.axis()
             .scale(chart.xScale)
             .orient("bottom")
-            .ticks(d3.time.months, 1)
+            // .ticks(d3.time.days, 30)
             .tickFormat(d3.time.format(getTimeFormatter()))
             .tickSize(-chart.height, 0, 0);
         }
@@ -90,7 +92,7 @@
             .scale(chart.yScale)
             .orient("right")
             .tickSize(chart.width, 0, 0)
-            .tickFormat(function(d){ return d.toFixed(2) + "%"; });
+            .tickFormat(function(d){ return d.toFixed(3) + "%"; });
         }
 
         function drawXAxis() {
@@ -159,8 +161,9 @@
             moment(chart.data[0].date)
           );
           var years = ( ( ( ( ( milliseconds / 1000 ) / 60 ) / 60 )/ 24 ) / 365 );
+          var days = years * 365;
 
-          return (years < 2) ? "%b \'%y" : "%Y";
+          return (days < 180) ? "%m-%d" : "%Y";
         }
         
         function init() {          

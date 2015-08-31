@@ -1,12 +1,31 @@
+@chartMagenta: #9B2250;
 .chart-app-index {
   @gray: #BBBDC0;
   .controls {
     padding: 50px;
+    .holding-selector, .etf-selector {
+      // float: left;
+      display: inline-block;
+      width: 300px;
+      margin-right: 30px;
+      .dropdown-menu {
+        width: 300px;
+        height: 180px;
+        overflow-y: scroll;
+      }
+    }
     .dropdown-toggle {
       width: 300px;
+      height: 60px;
+      background: @chartMagenta;
+      border-color: @chartMagenta;
+      &:hover {
+        background: darken(@chartMagenta, 5%);
+        border-color: darken(@chartMagenta, 5%);
+      }
     }
     input {
-      float: left;
+      // float: left;
     }
   }
 }

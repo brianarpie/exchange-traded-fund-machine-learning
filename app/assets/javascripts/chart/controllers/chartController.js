@@ -20,13 +20,13 @@
 
     function fetchEtfs() {
       EtfRsrc.get().$promise.then(function(data) {
-        $scope.etfs = data;
+        $scope.etfs = _.sortBy(data, function(d) { return d.name });
       });
     }
 
     function fetchHoldings(etf) {
       HoldingRsrc.get({etf_id: etf.id}).$promise.then(function(data) {
-        $scope.holdings = data;
+        $scope.holdings = _.sortBy(data, function(d) { return d.name });
       });
     }
 
@@ -41,7 +41,14 @@
           ChartSubscriptionSrvc.publish("holdingChanged", holding);
       });
       ChartSubscriptionSrvc.subscribe("etfChanged", fetchHoldings)
+
+      shortCircuit();
     }
+
+    function shortCircuit() {
+      $scope.selectedEtf = {name: "IVV", id: 3};
+      $scope.selectedHolding = {name: "PFE", id: 60};
+    };
 
     init();
 

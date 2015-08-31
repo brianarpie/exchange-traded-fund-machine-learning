@@ -14,6 +14,7 @@
  *
  *= require ../javascripts/chart/stylesheets/index
  *= require ../javascripts/chart/stylesheets/line-chart
+ *= require ../javascripts/chart/stylesheets/date-range
  *= require twitter/bootstrap
  *
  *= require all.less

@@ -3,63 +3,74 @@
   <line-chart></line-chart>
 
   <div class="controls">
-    <div class="btn-group" dropdown is-open="status.isopen">
-      <button type="button" 
-              class="btn btn-primary dropdown-toggle" 
-              ng-disabled="disabled"
-              dropdown-toggle 
-              >
-              {{selectedEtf.name}} <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="etf in etfs">
-          <a ng-click="$parent.selectedEtf = etf">
-            {{etf.name}}
-          </a>
-        </li>
-      </ul>
+    <div class="etf-selector">
+      <h4>Etf</h4>
+      <div class="btn-group" dropdown is-open="status.isopen">
+        <button type="button" 
+                class="btn btn-primary dropdown-toggle" 
+                ng-disabled="disabled"
+                dropdown-toggle 
+                >
+                {{selectedEtf.name}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="etf in etfs">
+            <a ng-click="$parent.selectedEtf = etf">
+              {{etf.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-
-    <div class="btn-group" dropdown is-open="status.isopen2">
-      <button type="button" 
-              class="btn btn-primary dropdown-toggle" 
-              ng-disabled="disabled"
-              dropdown-toggle 
-              >
-              {{selectedHolding.name}} <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="holding in holdings">
-          <a ng-click="$parent.selectedHolding = holding">
-            {{holding.name}}
-          </a>
-        </li>
-      </ul>
+    <div class="holding-selector">
+      <h4>Holding</h4>
+      <div class="btn-group" dropdown is-open="status.isopen2">
+        <button type="button" 
+                class="btn btn-primary dropdown-toggle" 
+                ng-disabled="disabled"
+                dropdown-toggle 
+                >
+                {{selectedHolding.name}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="holding in holdings">
+            <a ng-click="$parent.selectedHolding = holding">
+              {{holding.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- TODO: wrap this in a directive. -->
     <div ng-controller="DateRangeCtrl" class="date-range-pickers">
-      <input type="text"
-             class="start-date-picker"
-             datepicker-popup="{{datepickerFormat}}"
-             ng-model="startDate"
-             is-open="startDateOpened"
-             max-date="endDate" 
-             readonly="readonly" />
-      <span class="input-group-btn start-date-btn">
-        <button type="button" class="btn btn-default" ng-click="openStartDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-      </span>
+      <div class="start-date-container">
+        <h4>Start Date</h4>
+        <input type="text"
+               class="start-date-picker"
+               datepicker-popup="{{datepickerFormat}}"
+               ng-model="startDate"
+               is-open="startDateOpened"
+               max-date="endDate" 
+               readonly="readonly" />
+        <span class="input-group-btn start-date-btn">
+          <button type="button" class="btn btn-default" ng-click="openStartDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
 
-      <input type="text"
-             class="end-date-picker"
-             datepicker-popup="{{datepickerFormat}}"
-             ng-model="endDate"
-             is-open="endDateOpened"
-             min-date="startDate" 
-             readonly="readonly" />
-      <span class="input-group-btn end-date-btn">
-        <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-      </span>
+      <div class="end-date-container">
+        <h4>End Date</h4>
+        <input type="text"
+               class="end-date-picker"
+               datepicker-popup="{{datepickerFormat}}"
+               ng-model="endDate"
+               is-open="endDateOpened"
+               min-date="startDate" 
+               readonly="readonly" />
+        <span class="input-group-btn end-date-btn">
+          <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
     </div>
 
   </div>

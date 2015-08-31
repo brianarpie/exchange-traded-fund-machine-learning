@@ -44,7 +44,7 @@
       dateRangeEventHandler();
       dateRangeWatcher();
 
-      $scope.datepickerFormat = "EEEE MMMM dd, yyyy";
+      $scope.datepickerFormat = "yyyy-M-dd";
     }
 
     init();
