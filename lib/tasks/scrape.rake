@@ -36,8 +36,13 @@ namespace :scrape do
         if row.include? "Fund Holdings as of"
           @date = Date.parse(row.last)
         end
+        # not used at the moment
         if row.include? "Total Net Assets"
           total_net_assets = row.last.slice 1, row.last.length
+        end
+        if row.include? "Ticker"
+          weight_element = row.find { |e| /weight/i =~ e }
+          @weight_index = row.index(weight_element)
         end
         if row.first.index(/([A-Z]|[0-9]){2,5}/) == 0
           save_row_to_database(row, @date)
@@ -54,14 +59,14 @@ namespace :scrape do
       if @etf_holding.nil?
         @etf_holding = EtfHolding.create({ etf_id: @etf.id, holding_id: @holding.id })
       end
-      HistoricalPercentage.create({ value: row[4], date: date, etf_holding_id: @etf_holding.id })
+      HistoricalPercentage.create({ value: row[@weight_index], date: date, etf_holding_id: @etf_holding.id })
       print "." # used for loading visualization
     end
 
     def url_generator(query)
       urls = []
       query.each do |etf|
-        urls << { 
+        urls << {
           address: "https://www.ishares.com/us/products/#{etf[:id]}/ishares-#{etf[:name]}-etf/1395165510754.ajax?" + URI.encode_www_form({
               fileType: "csv",
               fileName: "#{etf[:ticker]}_holdings",
